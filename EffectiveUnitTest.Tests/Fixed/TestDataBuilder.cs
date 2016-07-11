@@ -1,4 +1,6 @@
-﻿namespace EffectiveUnitTest.Tests
+﻿using EffectiveUnitTest.Fixed;
+
+namespace EffectiveUnitTest.Tests.Fixed
 {
     public class a
     {

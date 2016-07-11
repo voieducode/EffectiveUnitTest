@@ -1,8 +1,9 @@
-﻿using System;
+﻿using EffectiveUnitTest.Faulty;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace EffectiveUnitTest.Tests
+namespace EffectiveUnitTest.Tests.Faulty
 {
     public class CustomerTest
     {
@@ -103,8 +104,9 @@ namespace EffectiveUnitTest.Tests
         [Fact]
         public void Statement()
         {
-            foreach (var customer in _customers)
+            for (int i = 0; i < _customers.Length; i++)
             {
+                var customer = _customers[i];
                 Assert.Equal(
                     ExpStatement(
                         "Rental record for {0}\n" +

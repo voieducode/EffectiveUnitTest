@@ -1,4 +1,6 @@
-namespace EffectiveUnitTest.Tests
+using EffectiveUnitTest.Faulty;
+
+namespace EffectiveUnitTest.Tests.Faulty
 {
     public class ObjectMother
     {

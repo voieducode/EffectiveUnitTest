@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EffectiveUnitTest
+namespace EffectiveUnitTest.Fixed
 {
     public class Customer
     {
@@ -33,7 +33,7 @@ namespace EffectiveUnitTest
                 }
 
                 result +=
-                    "Amount owed is " + TotalCharge +
+                    "Amount owed is " + TotalCharge.ToString("F1") +
                     "\n" + "You earned " +
                     TotalPoints +
                     " frequent renter points";
@@ -57,7 +57,7 @@ namespace EffectiveUnitTest
 
                 result +=
                     "<p>Amount owed is <em>" +
-                    TotalCharge + "</em></p>\n" +
+                    TotalCharge.ToString("F1") + "</em></p>\n" +
                     "<p>You earned <em>" +
                     TotalPoints +
                     " frequent renter points</em></p>";
@@ -86,7 +86,7 @@ namespace EffectiveUnitTest
 
         public int Points => Movie.GetPoints(DaysRented);
 
-        public string LineItem => Movie.Title+ " " + Charge;
+        public string LineItem => Movie.Title+ " " + Charge.ToString("F1");
     }
 
     public class Movie
