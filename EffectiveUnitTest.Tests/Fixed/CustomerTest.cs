@@ -1,9 +1,9 @@
-﻿using EffectiveUnitTest.Faulty;
+﻿using EffectiveUnitTest.Fixed;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace EffectiveUnitTest.Tests.Faulty
+namespace EffectiveUnitTest.Tests.Fixed
 {
     public class CustomerTest
     {
@@ -42,7 +42,7 @@ namespace EffectiveUnitTest.Tests.Faulty
         {
             var result = "";
             foreach (var rental in rentals)
-                result += $"{startsWith}{rental.Movie.Title}\t{rental.Charge}{endsWith}\n";
+                result += $"{startsWith}{rental.Movie.Title} {rental.Charge:F1}{endsWith}\n";
             return result;
         }
 
@@ -77,11 +77,13 @@ namespace EffectiveUnitTest.Tests.Faulty
                     ExpStatement(
                         "<h1>Rental record for " +
                         "<em>{0}</em></h1>\n{1}" +
-                        "<p>Amount owed is <em>{2}</em>" +
+                        "<p>Amount owed is <em>{2:F1}</em>" +
                         "</p>\n<p>You earned <em>{3}" +
                         " frequent renter points</em></p>",
                         _customers[i],
-                        RentalInfo("<p>", "</p>", _customers[i].Rentals)),
+                        RentalInfo(
+                            startsWith: "<p>", endsWith: "</p>",
+                            rentals: _customers[i].Rentals)),
                     _customers[i].HtmlStatement);
             }
         }
@@ -108,11 +110,13 @@ namespace EffectiveUnitTest.Tests.Faulty
                 Assert.Equal(
                     ExpStatement(
                         "Rental record for {0}\n" +
-                        "{1}Amount owed is {2}\n" +
+                        "{1}Amount owed is {2:F1}\n" +
                         "You earned {3} frequent " +
                         "renter points",
                         customer,
-                        RentalInfo("\t", "", customer.Rentals)),
+                        RentalInfo(
+                            startsWith: "\t", endsWith: "", 
+                            rentals: customer.Rentals)),
                     customer.Statement);
             }
         }

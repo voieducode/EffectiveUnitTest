@@ -62,7 +62,9 @@
     <Compile Include="Faulty\CustomerTestFinal.cs" />
     <Compile Include="Faulty\CustomerTest.cs" />
     <Compile Include="Faulty\ObjectMother.cs" />
+    <Compile Include="Fixed\CustomerTest.cs" />
     <Compile Include="Fixed\CustomerTestFinal.cs" />
+    <Compile Include="Fixed\ObjectMother.cs" />
     <Compile Include="Fixed\TestDataBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Faulty\TestDataBuilder.cs" />
