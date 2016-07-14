@@ -8,7 +8,7 @@ namespace EffectiveUnitTest.Tests.Faulty
     /// <summary>
     ///     Third simplification step = inline
     /// </summary>
-    public class CustomerTestInlineSetup
+    public class CustomerTestSwitchToDataBuilder
     {
         private static string RentalInfo(
             string startsWith,
@@ -35,15 +35,29 @@ namespace EffectiveUnitTest.Tests.Faulty
         }
 
         [Fact]
-        public void NoRentalsStatement()
+        public void AllRentalTypesStatement()
         {
             Assert.Equal(
-                "Rental record for David\n" +
-                "Amount owed is 0\n" +
-                "You earned 0 frequent renter points",
-                ObjectMother
-                    .CustomerWithNoRentals("David")
-                    .Statement);
+                "Rental record for Pat\n" +
+                "\tGodfather 4\t9.0\n" +
+                "\tScarface\t3.5\n" +
+                "\tLion King\t1.5\n" +
+                "Amount owed is 14.0\n" +
+                "You earned 4 frequent renter points",
+                a.customer
+                    .w("Pat").w(
+                        a.rental.w(
+                            a.movie
+                            .w(Movie.Type.NEW_RELEASE)),
+                        a.rental.w(
+                            a.movie
+                            .w("Scarface")
+                            .w(Movie.Type.REGULAR)),
+                       a.rental.w(
+                            a.movie
+                            .w("Lion King")
+                            .w(Movie.Type.CHILDREN))).build()
+                .Statement);
         }
 
         [Fact]
@@ -62,11 +76,17 @@ namespace EffectiveUnitTest.Tests.Faulty
         [Fact]
         public void HtmlStatement()
         {
-            var customers = new[] {ObjectMother.CustomerWithNoRentals(
-                "David"), ObjectMother.CustomerWithOneNewRelease(
-                    "John"), ObjectMother.CustomerWithOneNewReleaseAndOneRegular(
-                        "Steve"), ObjectMother.CustomerWithOneOfEachRentalType(
-                            "Pat")};
+            var customers = new[]
+            {
+                ObjectMother.CustomerWithNoRentals(
+                    "David"),
+                ObjectMother.CustomerWithOneNewRelease(
+                    "John"),
+                ObjectMother.CustomerWithOneNewReleaseAndOneRegular(
+                    "Steve"),
+                ObjectMother.CustomerWithOneOfEachRentalType(
+                    "Pat")
+            };
 
             foreach (var customer in customers)
             {
@@ -98,34 +118,6 @@ namespace EffectiveUnitTest.Tests.Faulty
         }
 
         [Fact]
-        public void OneNewReleaseStatement()
-        {
-            Assert.Equal(
-                "Rental record for John\n" +
-                "\tGodfather 4\t9.0\n" +
-                "Amount owed is 9.0\n" +
-                "You earned 2 frequent renter points",
-                ObjectMother
-                    .CustomerWithOneNewRelease("John")
-                    .Statement);
-        }
-
-        [Fact]
-        public void AllRentalTypesStatement()
-        {
-            Assert.Equal(
-                "Rental record for Pat\n" +
-                "\tGodfather 4\t9.0\n" +
-                "\tScarface\t3.5\n" +
-                "\tLion King\t1.5\n" +
-                "Amount owed is 14.0\n" +
-                "You earned 4 frequent renter points",
-                ObjectMother
-                    .CustomerWithOneOfEachRentalType("Pat")
-                    .Statement);
-        }
-
-        [Fact]
         public void NewReleaseAndRegularStatement()
         {
             Assert.Equal(
@@ -134,9 +126,44 @@ namespace EffectiveUnitTest.Tests.Faulty
                 "\tScarface\t3.5\n" +
                 "Amount owed is 12.5\n" +
                 "You earned 3 frequent renter points",
-                ObjectMother
-                    .CustomerWithOneNewReleaseAndOneRegular("Steve")
-                    .Statement);
+                a.customer
+                    .w("Steve").w(
+                    a.rental.w(
+                        a.movie
+                        .w(Movie.Type.NEW_RELEASE)),
+                    a.rental.w(
+                        a.movie
+                        .w("Scarface")
+                        .w(Movie.Type.REGULAR))).build()
+                .Statement);
+        }
+
+        [Fact]
+        public void NoRentalsStatement()
+        {
+            Assert.Equal(
+                "Rental record for David\n" +
+                "Amount owed is 0\n" +
+                "You earned 0 frequent renter points",
+                a.customer
+                 .w("David").build()
+                 .Statement);
+        }
+
+        [Fact]
+        public void OneNewReleaseStatement()
+        {
+            Assert.Equal(
+                "Rental record for John\n" +
+                "\tGodfather 4\t9.0\n" +
+                "Amount owed is 9.0\n" +
+                "You earned 2 frequent renter points",
+                a.customer
+                    .w("John").w(
+                    a.rental.w(
+                        a.movie
+                            .w(Movie.Type.NEW_RELEASE))).build()
+                .Statement);
         }
     }
 }

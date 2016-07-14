@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Faulty\CustomerTestSwitchToDataBuilder.cs" />
     <Compile Include="Faulty\CustomerTestInlineSetup.cs" />
     <Compile Include="Faulty\CustomerTestExpectLiterals.cs" />
     <Compile Include="Faulty\CustomerTestUnloop.cs" />
