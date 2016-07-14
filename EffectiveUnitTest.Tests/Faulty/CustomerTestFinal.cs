@@ -16,16 +16,16 @@ namespace EffectiveUnitTest.Tests.Faulty
                 "Amount owed is 14.0\n" +
                 "You earned 4 frequent renter points",
                 a.customer
-                 .w("Pat")
-                 .w(a.rental
-                     .w(a.movie
-                         .w(Movie.Type.NEW_RELEASE)),
-                    a.rental
-                     .w(a.movie
-                         .w("Scarface")
-                         .w(Movie.Type.REGULAR)),
-                    a.rental
-                     .w(a.movie
+                 .w("Pat").w(
+                    a.rental.w(
+                        a.movie
+                        .w(Movie.Type.NEW_RELEASE)),
+                    a.rental.w(
+                        a.movie
+                        .w("Scarface")
+                        .w(Movie.Type.REGULAR)),
+                    a.rental.w(
+                        a.movie
                          .w("Lion King")
                          .w(Movie.Type.CHILDREN))).build()
                  .Statement
@@ -48,12 +48,12 @@ namespace EffectiveUnitTest.Tests.Faulty
                 "Amount owed is 12.5\n" +
                 "You earned 3 frequent renter points",
                 a.customer
-                 .w("Steve")
-                 .w(a.rental
-                     .w(a.movie
-                         .w(Movie.Type.NEW_RELEASE)),
-                    a.rental
-                     .w(a.movie
+                 .w("Steve").w(
+                    a.rental.w(
+                        a.movie
+                        .w(Movie.Type.NEW_RELEASE)),
+                    a.rental.w(
+                        a.movie
                          .w("Scarface")
                          .w(Movie.Type.REGULAR))).build()
                  .Statement
@@ -95,10 +95,10 @@ namespace EffectiveUnitTest.Tests.Faulty
                 "<p>Amount owed is <em>9.0</em></p>\n" +
                 "<p>You earned <em>2 frequent renter points</em></p>",
                 a.customer
-                 .w("John")
-                 .w(a.rental
-                     .w(a.movie
-                         .w(Movie.Type.NEW_RELEASE)))
+                 .w("John").w(
+                    a.rental.w(
+                        a.movie
+                        .w(Movie.Type.NEW_RELEASE)))
                  .build()
                  .HtmlStatement
                 );
@@ -113,9 +113,9 @@ namespace EffectiveUnitTest.Tests.Faulty
                 "Amount owed is 9.0\n" +
                 "You earned 2 frequent renter points",
                 a.customer
-                 .w("John")
-                 .w(a.rental
-                     .w(a.movie
+                 .w("John").w(
+                    a.rental.w(
+                        a.movie
                          .w(Movie.Type.NEW_RELEASE))).build()
                  .Statement
                 );
