@@ -35,10 +35,10 @@ namespace EffectiveUnitTest.Tests.Faulty
                 return new CustomerBuilder(name, rentals);
             }
 
-            public CustomerBuilder w(string name)
+            public CustomerBuilder w(string aName)
             {
                 return
-                    new CustomerBuilder(name, rentals);
+                    new CustomerBuilder(aName, rentals);
             }
 
             public Customer build()
@@ -67,11 +67,11 @@ namespace EffectiveUnitTest.Tests.Faulty
                 this.days = days;
             }
 
-            public RentalBuilder w(MovieBuilder movie)
+            public RentalBuilder w(MovieBuilder aMovie)
             {
                 return
                     new RentalBuilder(
-                        movie.build(), days);
+                        aMovie.build(), days);
             }
 
             public Rental build()
@@ -95,14 +95,14 @@ namespace EffectiveUnitTest.Tests.Faulty
                 this.type = type;
             }
 
-            public MovieBuilder w(Movie.Type type)
+            public MovieBuilder w(Movie.Type aType)
             {
-                return new MovieBuilder(name, type);
+                return new MovieBuilder(name, aType);
             }
 
-            public MovieBuilder w(string name)
+            public MovieBuilder w(string aName)
             {
-                return new MovieBuilder(name, type);
+                return new MovieBuilder(aName, type);
             }
 
             public Movie build()

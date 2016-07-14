@@ -59,6 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Faulty\CustomerTestInlineSetup.cs" />
+    <Compile Include="Faulty\CustomerTestExpectLiterals.cs" />
+    <Compile Include="Faulty\CustomerTestUnloop.cs" />
     <Compile Include="Faulty\CustomerTestFinal.cs" />
     <Compile Include="Faulty\CustomerTest.cs" />
     <Compile Include="Faulty\ObjectMother.cs" />

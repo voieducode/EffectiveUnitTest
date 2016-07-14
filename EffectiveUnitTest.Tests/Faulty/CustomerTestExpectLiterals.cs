@@ -5,9 +5,12 @@ using Xunit;
 
 namespace EffectiveUnitTest.Tests.Faulty
 {
-    public class CustomerTest
+    /// <summary>
+    ///     Second simplification step = expect literals
+    /// </summary>
+    public class CustomerTestExpectLiterals
     {
-        public CustomerTest()
+        public CustomerTestExpectLiterals()
         {
             _david = ObjectMother.CustomerWithNoRentals(
                 _davidName);
@@ -60,6 +63,16 @@ namespace EffectiveUnitTest.Tests.Faulty
         }
 
         [Fact]
+        public void DavidStatement()
+        {
+            Assert.Equal(
+                "Rental record for David\n" +
+                "Amount owed is 0\n" +
+                "You earned 0 frequent renter points",
+                _david.Statement);
+        }
+
+        [Fact]
         public void GetName()
         {
             Assert.Equal(_davidName, _david.Name);
@@ -71,7 +84,7 @@ namespace EffectiveUnitTest.Tests.Faulty
         [Fact]
         public void HtmlStatement()
         {
-            foreach (Customer customer in _customers)
+            foreach (var customer in _customers)
             {
                 Assert.Equal(
                     ExpStatement(
@@ -101,20 +114,39 @@ namespace EffectiveUnitTest.Tests.Faulty
         }
 
         [Fact]
-        public void Statement()
+        public void JohnStatement()
         {
-            foreach (var customer in _customers)
-            {
-                Assert.Equal(
-                    ExpStatement(
-                        "Rental record for {0}\n" + 
-                        "{1}" + 
-                        "Amount owed is {2}\n" +
-                        "You earned {3} frequent renter points",
-                        customer,
-                        RentalInfo("\t", "", customer.Rentals)),
-                    customer.Statement);
-            }
+            Assert.Equal(
+                "Rental record for John\n" +
+                "\tGodfather 4\t9.0\n" +
+                "Amount owed is 9.0\n" +
+                "You earned 2 frequent renter points",
+                _john.Statement);
+        }
+
+        [Fact]
+        public void PatStatement()
+        {
+            Assert.Equal(
+                "Rental record for Pat\n" +
+                "\tGodfather 4\t9.0\n" +
+                "\tScarface\t3.5\n" +
+                "\tLion King\t1.5\n" +
+                "Amount owed is 14.0\n" +
+                "You earned 4 frequent renter points",
+                _pat.Statement);
+        }
+
+        [Fact]
+        public void SteveStatement()
+        {
+            Assert.Equal(
+                "Rental record for Steve\n" +
+                "\tGodfather 4\t9.0\n" +
+                "\tScarface\t3.5\n" +
+                "Amount owed is 12.5\n" +
+                "You earned 3 frequent renter points",
+                _steve.Statement);
         }
     }
 }

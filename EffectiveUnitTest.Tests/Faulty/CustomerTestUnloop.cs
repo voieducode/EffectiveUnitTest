@@ -5,9 +5,12 @@ using Xunit;
 
 namespace EffectiveUnitTest.Tests.Faulty
 {
-    public class CustomerTest
+    /// <summary>
+    /// First simplification step = unwind the loop
+    /// </summary>
+    public class CustomerTestUnloop
     {
-        public CustomerTest()
+        public CustomerTestUnloop()
         {
             _david = ObjectMother.CustomerWithNoRentals(
                 _davidName);
@@ -60,6 +63,62 @@ namespace EffectiveUnitTest.Tests.Faulty
         }
 
         [Fact]
+        public void DavidStatement()
+        {
+            Assert.Equal(
+                ExpStatement(
+                    "Rental record for {0}\n" +
+                    "{1}" +
+                    "Amount owed is {2}\n" +
+                    "You earned {3} frequent renter points",
+                    _david,
+                    RentalInfo("\t", "", _david.Rentals)),
+                _david.Statement);
+        }
+
+        [Fact]
+        public void JohnStatement()
+        {
+            Assert.Equal(
+                ExpStatement(
+                    "Rental record for {0}\n" +
+                    "{1}" +
+                    "Amount owed is {2}\n" +
+                    "You earned {3} frequent renter points",
+                    _john,
+                    RentalInfo("\t", "", _john.Rentals)),
+                _john.Statement);
+        }
+
+        [Fact]
+        public void PatStatement()
+        {
+            Assert.Equal(
+                ExpStatement(
+                    "Rental record for {0}\n" +
+                    "{1}" +
+                    "Amount owed is {2}\n" +
+                    "You earned {3} frequent renter points",
+                    _pat,
+                    RentalInfo("\t", "", _pat.Rentals)),
+                _pat.Statement);
+        }
+
+        [Fact]
+        public void SteveStatement()
+        {
+            Assert.Equal(
+                ExpStatement(
+                    "Rental record for {0}\n" +
+                    "{1}" +
+                    "Amount owed is {2}\n" +
+                    "You earned {3} frequent renter points",
+                    _steve,
+                    RentalInfo("\t", "", _steve.Rentals)),
+                _steve.Statement);
+        }
+
+        [Fact]
         public void GetName()
         {
             Assert.Equal(_davidName, _david.Name);
@@ -71,7 +130,7 @@ namespace EffectiveUnitTest.Tests.Faulty
         [Fact]
         public void HtmlStatement()
         {
-            foreach (Customer customer in _customers)
+            foreach (var customer in _customers)
             {
                 Assert.Equal(
                     ExpStatement(
@@ -98,23 +157,6 @@ namespace EffectiveUnitTest.Tests.Faulty
                                       Movie.Type.UNKNOWN),
                             4))
                 );
-        }
-
-        [Fact]
-        public void Statement()
-        {
-            foreach (var customer in _customers)
-            {
-                Assert.Equal(
-                    ExpStatement(
-                        "Rental record for {0}\n" + 
-                        "{1}" + 
-                        "Amount owed is {2}\n" +
-                        "You earned {3} frequent renter points",
-                        customer,
-                        RentalInfo("\t", "", customer.Rentals)),
-                    customer.Statement);
-            }
         }
     }
 }
